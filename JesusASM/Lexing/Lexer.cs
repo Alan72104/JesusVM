@@ -11,6 +11,8 @@ public class LexedSource
 
 public class Lexer
 {
+    private static List<KeyValuePair<TokenType, string>> Literals;
+
     private char Cur =>
         idx >= str.Length ? '\0' : str[idx];
     private SourceLocation Location =>
@@ -23,9 +25,22 @@ public class Lexer
     private int chars;
     private int idx;
     private int lineStartIdx;
-    private StringBuilder seq = new();
     private StringBuilder errSeq = new();
     private SourceLocation errSeqLoc;
+
+    static Lexer()
+    {
+        Literals = new()
+        {
+            new(TokenType.Period,  "."),
+            new(TokenType.Colon,   ":"),
+            new(TokenType.LParen,  "("),
+            new(TokenType.RParen,  ")"),
+            new(TokenType.Define,  "define"),
+            new(TokenType.Public,  "public"),
+            new(TokenType.Private, "private"),
+        };
+    }
 
     public LexedSource LexSource(string s)
     {
@@ -36,7 +51,6 @@ public class Lexer
         chars = 0;
         idx = 0;
         lineStartIdx = 0;
-        seq.Clear();
         errSeq.Clear();
 
         while (Cur != '\0')
@@ -82,42 +96,17 @@ public class Lexer
     {
         Debug.Assert(HasMore());
         SourceLocation start = Location;
-        if (Cur == '.')
+
+        foreach (var (type, value) in Literals)
         {
-            token = new(TokenType.Period, Eat(), start);
-            return true;
+            if (Matches(value))
+            {
+                token = new(type, Eat(value), start);
+                return true;
+            }
         }
-        else if (Cur == ':')
-        {
-            token = new(TokenType.Colon, Eat(), start);
-            return true;
-        }
-        else if (Cur == '(')
-        {
-            token = new(TokenType.LParen, Eat(), start);
-            return true;
-        }
-        else if (Cur == ')')
-        {
-            token = new(TokenType.RParen, Eat(), start);
-            return true;
-        }
-        else if (Matches("define"))
-        {
-            token = new(TokenType.Define, Eat("define"), start);
-            return true;
-        }
-        else if (Matches("public"))
-        {
-            token = new(TokenType.Public, Eat("public"), start);
-            return true;
-        }
-        else if (Matches("private"))
-        {
-            token = new(TokenType.Private, Eat("private"), start);
-            return true;
-        }
-        else if (Cur is
+
+        if (Cur is
             '_' or
             (>= 'a' and <= 'z') or
             (>= 'A' and <= 'Z'))
@@ -178,10 +167,10 @@ public class Lexer
         return s;
     }
 
-    private bool Matches(string s)
+    private bool Matches(ReadOnlySpan<char> s)
     {
         return str.Length - idx >= s.Length &&
-            str[idx..(idx + s.Length)] == s;
+            str.AsSpan()[idx..(idx + s.Length)] == s;
     }
 
     private char Peek(int n)

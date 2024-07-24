@@ -1,7 +1,7 @@
 ﻿using JesusASM;
 using JesusASM.Lexing;
 
-namespace JesusVM.Test;
+namespace JesusVM.Example;
 
 internal class Program
 {
