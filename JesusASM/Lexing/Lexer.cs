@@ -84,7 +84,10 @@ public class Lexer
             lineStartIdx = idx + 1;
         }
 
-        Console.WriteLine($"Lexed {str.Length} chars");
+        int spaceCount = tokens.Count(token => token.Type == TokenType.Whitespace);
+        Console.WriteLine($"Lexed {str.Length} chars, got {tokens.Count}, {spaceCount} are whitespace");
+        tokens.RemoveAll(token => token.Type == TokenType.Whitespace);
+
         return new LexedSource()
         {
             Lines = srcLines,
@@ -170,7 +173,7 @@ public class Lexer
     private bool Matches(ReadOnlySpan<char> s)
     {
         return str.Length - idx >= s.Length &&
-            str.AsSpan()[idx..(idx + s.Length)] == s;
+            str.AsSpan()[idx..(idx + s.Length)].SequenceEqual(s);
     }
 
     private char Peek(int n)

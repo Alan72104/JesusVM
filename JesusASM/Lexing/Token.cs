@@ -1,10 +1,10 @@
 ﻿namespace JesusASM.Lexing;
 
-public struct Token
+public readonly struct Token
 {
-    public TokenType Type;
-    public string Value;
-    public SourceLocation Loc;
+    public readonly TokenType Type;
+    public readonly string Value;
+    public readonly SourceLocation Loc;
 
     public Token(TokenType type, char value, SourceLocation loc) :
         this(type, value.ToString(), loc)
