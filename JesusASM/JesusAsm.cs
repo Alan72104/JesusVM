@@ -1,4 +1,4 @@
-﻿using JesusASM.Lexer;
+﻿using JesusASM.Lexing;
 
 namespace JesusASM;
 

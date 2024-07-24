@@ -1,4 +1,4 @@
-﻿namespace JesusASM.Lexer;
+﻿namespace JesusASM.Lexing;
 
 public enum TokenType
 {

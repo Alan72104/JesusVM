@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Text;
 
-namespace JesusASM.Lexer;
+namespace JesusASM.Lexing;
 
 public class LexedSource
 {

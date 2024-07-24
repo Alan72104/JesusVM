@@ -1,5 +1,5 @@
 ﻿using JesusASM;
-using JesusASM.Lexer;
+using JesusASM.Lexing;
 
 namespace JesusVM.Test;
 
