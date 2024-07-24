@@ -151,7 +151,7 @@ public class Lexer
                 {
                     srcLines.Add(str[lineStartIdx..(idx + 1)]);
                     lineStartIdx = idx + 1;
-                    chars = 0;
+                    chars = -1; // Incremented to 0 in Eat()
                     lines++;
                 }
                 Eat();

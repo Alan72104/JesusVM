@@ -39,6 +39,7 @@ internal class Program
         {
             string val = Escape(tok.Value);
             val = $"\"{val}\"";
+
             string line = "";
             if (tok.Loc.Line > lastLinePrinted)
             {
@@ -46,6 +47,7 @@ internal class Program
                 line = $"\"{line}\"";
                 lastLinePrinted = tok.Loc.Line;
             }
+
             Console.WriteLine($"{tok.Type,15} {tok.Loc,10} {val,-30} {line}");
         }
         Module module1 = jasm.Compile(src);
