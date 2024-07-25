@@ -18,7 +18,7 @@ public class Parser
     private LexedSource src = null!;
     private int idx;
 
-    public void Module(Module module, LexedSource src)
+    public void ModuleDef(Module module, LexedSource src)
     {
         this.module = module;
         this.src = src;
@@ -29,7 +29,7 @@ public class Parser
             Expect([TokenType.Period, TokenType.Define]);
             if (Cur.Type == TokenType.Period)
             {
-                GlobalDef();
+                Metadata();
             }
             else if (Cur.Type == TokenType.Define)
             {
@@ -38,7 +38,7 @@ public class Parser
         }
     }
 
-    private void GlobalDef()
+    private void Metadata()
     {
         Eat(TokenType.Period);
         Token key = Eat(TokenType.Identifier);
@@ -80,6 +80,14 @@ public class Parser
         }
 
         module.Functions.Add(name, new byte[0]);
+    }
+
+    private bool OptionalTypeDef(out string type)
+    {
+        //if (Cur.Type == TokenType.Identifier)
+        //    Token tok = Eat(TokenType.Identifier);
+        type = "";
+        return false;
     }
 
     private void Expect(TokenType type)

@@ -135,6 +135,21 @@ public class Lexer
             token = new(TokenType.Number, str[start.Index..idx], start);
             return true;
         }
+        else if (Cur is '"')
+        {
+            Eat();
+            while (HasMore())
+            {
+                if (Cur is '"')
+                {
+                    Eat();
+                    token = new(TokenType.String, str[start.Index..idx], start);
+                    return true;
+                }
+                Eat();
+            }
+            throw new Exception($"Unterminated string at {Location}");
+        }
         else if (char.IsWhiteSpace(Cur))
         {
             while (HasMore() && char.IsWhiteSpace(Cur))

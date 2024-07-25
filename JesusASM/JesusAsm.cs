@@ -15,7 +15,7 @@ public class JesusAsm
             GlobalDefinitions = new()
         };
 
-        parser.Module(module, src);
+        parser.ModuleDef(module, src);
 
         return module;
     }

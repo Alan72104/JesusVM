@@ -11,27 +11,37 @@ internal class Program
         JesusAsm jasm = new();
         LexedSource src = lexer.LexSource(
             """
-            .entry main
-            .stack 1024
+            .module "Test"
+            .stack 2mb
 
-            define public main()i:
-            	ldi 2
-            	ldi 34
-            	ldi 35
+            const "main()i" = .function int main()
+            const "test(ii)i" = .function int test(int, int)
 
-            	call test(ii)i
+            section code
 
-            	mul
+            public int main():
+                .locals 1
 
-            	hlt
+                ldi 420
+                store 0
 
-            define public test(ii)i:
-            	load 0
-            	load 1
+                ldi 69
+                load 0
 
-            	add
+                add
+                dup
 
-            	ret
+                call "test(ii)i"
+
+                ret
+
+            public int test(int, int):
+                load 0
+                load 1
+
+                mul
+
+                ret 
             """);
 
         int lastLinePrinted = -1;

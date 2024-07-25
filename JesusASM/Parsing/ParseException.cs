@@ -24,8 +24,9 @@ public class ParseException : Exception
 
             msg = $"""
                   {msg}
-                  {one}{two}{three}
-                  {four}{five}
+                          at {token.Loc.ToString().Pastel(ConsoleColor.Red)}
+                          {one}{two}{three}
+                          {four}{five}
                   """;
             return new ParseException(msg);
         }
@@ -39,8 +40,9 @@ public class ParseException : Exception
 
             msg = $"""
                   {msg}
-                  {one}
-                  {four}{five}
+                          at {"EOF".ToString().Pastel(ConsoleColor.Red)}
+                          {one}
+                          {four}{five}
                   """;
             return new ParseException(msg);
         }

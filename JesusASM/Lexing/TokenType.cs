@@ -11,6 +11,7 @@ public enum TokenType
     RParen,
 
     Identifier,
+    String,
     Number,
 
     Define,
