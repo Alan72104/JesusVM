@@ -24,6 +24,8 @@ public class Parser
         this.src = src;
         idx = 0;
 
+        src.Tokens.RemoveAll(token => token.Type == TokenType.Whitespace);
+
         while (HasMore())
         {
             Expect([TokenType.Period, TokenType.Define]);

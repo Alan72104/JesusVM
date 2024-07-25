@@ -33,9 +33,11 @@ public class Lexer
         Literals = new()
         {
             new(TokenType.Period,  "."),
+            new(TokenType.Comma,   ","),
             new(TokenType.Colon,   ":"),
             new(TokenType.LParen,  "("),
             new(TokenType.RParen,  ")"),
+            new(TokenType.Equals,  "="),
             new(TokenType.Define,  "define"),
             new(TokenType.Public,  "public"),
             new(TokenType.Private, "private"),
@@ -83,10 +85,6 @@ public class Lexer
             srcLines.Add(str[lineStartIdx..(idx)]);
             lineStartIdx = idx + 1;
         }
-
-        int spaceCount = tokens.Count(token => token.Type == TokenType.Whitespace);
-        Console.WriteLine($"Lexed {str.Length} chars, got {tokens.Count}, {spaceCount} are whitespace");
-        tokens.RemoveAll(token => token.Type == TokenType.Whitespace);
 
         return new LexedSource()
         {
@@ -148,7 +146,9 @@ public class Lexer
                 }
                 Eat();
             }
-            throw new Exception($"Unterminated string at {Location}");
+            // Unterminated
+            token = new(TokenType.Error, str[start.Index..idx], start);
+            return true;
         }
         else if (char.IsWhiteSpace(Cur))
         {

@@ -6,9 +6,11 @@ public enum TokenType
     Whitespace,
 
     Period,
+    Comma,
     Colon,
     LParen,
     RParen,
+    Equals,
 
     Identifier,
     String,
