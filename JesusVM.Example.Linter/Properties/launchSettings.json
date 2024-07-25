@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "JesusVM.Example.Linter": {
+      "commandName": "Project",
+      "commandLineArgs": "Test.jasm"
+    }
+  }
+}

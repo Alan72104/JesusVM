@@ -60,6 +60,7 @@ internal class Program
 
             Console.WriteLine($"{tok.Type,15} {tok.Loc,10} {val,-30} {line}");
         }
+
         Module module1 = jasm.Compile(src);
 
         JesusVm jvm = new();
