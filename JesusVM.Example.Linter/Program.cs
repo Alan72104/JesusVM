@@ -61,20 +61,20 @@ internal class Program
     {
         Dictionary<TokenType, ConsoleColor> colorMap = new()
         {
-            { TokenType.Error, ConsoleColor.Red},
-            { TokenType.Whitespace, ConsoleColor.Gray},
-            { TokenType.Period, ConsoleColor.Gray},
-            { TokenType.Comma, ConsoleColor.Gray},
-            { TokenType.Colon, ConsoleColor.Gray},
-            { TokenType.LParen, ConsoleColor.Yellow},
-            { TokenType.RParen, ConsoleColor.Yellow},
-            { TokenType.Equals, ConsoleColor.Gray},
-            { TokenType.Identifier, ConsoleColor.Cyan},
-            { TokenType.String, ConsoleColor.DarkCyan},
-            { TokenType.Number, ConsoleColor.DarkCyan},
-            { TokenType.Define, ConsoleColor.Yellow},
-            { TokenType.Public, ConsoleColor.Yellow},
-            { TokenType.Private, ConsoleColor.Yellow},
+            { TokenType.Error, ConsoleColor.Red },
+            { TokenType.Whitespace, ConsoleColor.Gray },
+            { TokenType.Period, ConsoleColor.Gray },
+            { TokenType.Comma, ConsoleColor.Gray },
+            { TokenType.Colon, ConsoleColor.Gray },
+            { TokenType.LParen, ConsoleColor.Yellow },
+            { TokenType.RParen, ConsoleColor.Yellow },
+            { TokenType.Equals, ConsoleColor.Gray },
+            { TokenType.Identifier, ConsoleColor.Cyan },
+            { TokenType.String, ConsoleColor.DarkCyan },
+            { TokenType.Number, ConsoleColor.DarkCyan },
+            { TokenType.Define, ConsoleColor.Yellow },
+            { TokenType.Public, ConsoleColor.Yellow },
+            { TokenType.Private, ConsoleColor.Yellow },
         };
         StringBuilder sb = new();
         foreach (var tok in src.Tokens)
